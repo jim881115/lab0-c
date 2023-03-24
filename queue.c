@@ -92,13 +92,19 @@ bool q_delete_mid(struct list_head *head)
 {
     if (!head || list_empty(head))
         return 0;
-    struct list_head *fast = head->next, *slow = head->next;
+    /* struct list_head *fast = head->next, *slow = head->next;
     while (fast != head && fast->next != head) {
         fast = fast->next->next;
         slow = slow->next;
     }
     list_del(slow);
-    q_release_element(list_entry(slow, element_t, list));
+    q_release_element(list_entry(slow, element_t, list));*/
+    int mid = q_size(head) / 2;
+    struct list_head *temp = head->next;
+    for (int i = 0; i < mid; i++)
+        temp = temp->next;
+    list_del(temp);
+    q_release_element(list_entry(temp, element_t, list));
     return true;
 }
 
